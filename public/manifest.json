@@ -1,0 +1,30 @@
+{
+  "short_name": "Spotify Artist Search",
+  "name": "Spotify Artist Search",
+  "icons": [
+    {
+      "src": "spotify-48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "spotify-96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "spotify-144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "spotify-240.png",
+      "type": "image/png",
+      "sizes": "240x240"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
