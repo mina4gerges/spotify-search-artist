@@ -3,7 +3,6 @@ import {useHistory, useRouteMatch} from 'react-router-dom';
 import InputComponent from '../Input/InputComp';
 import {SearchArtistContext} from '../../context/searchArtist';
 import {handleChange, handleSubmit} from '../../actions/searchArtist';
-import CenterMiddlePage from '../../hoc/CenterMiddlePage/CenterMiddlePage';
 
 import useStyles from './styles';
 
@@ -12,7 +11,7 @@ import useStyles from './styles';
  * @returns {JSX.Element}
  * @constructor
  */
-const SearchComponent = () => {
+const SearchComponent = ({source = 'standAlone'}) => {
 
     const classes = useStyles();
 
@@ -22,21 +21,19 @@ const SearchComponent = () => {
     const {state: {id, name, type, label, value, error, endAdornment}, dispatch} = useContext(SearchArtistContext);
 
     return (
-        <CenterMiddlePage>
-            <form onSubmit={handleSubmit(dispatch, value, history, path)}>
-                <InputComponent
-                    id={id}
-                    name={name}
-                    type={type}
-                    label={label}
-                    value={value}
-                    error={error}
-                    endAdornment={endAdornment}
-                    className={classes.inputWidth}
-                    handleChange={handleChange(dispatch)}
-                />
-            </form>
-        </CenterMiddlePage>
+        <form onSubmit={handleSubmit(dispatch, value, source, history, path)}>
+            <InputComponent
+                id={id}
+                name={name}
+                type={type}
+                label={label}
+                value={value}
+                error={error}
+                endAdornment={endAdornment}
+                className={classes.inputWidth}
+                handleChange={handleChange(dispatch)}
+            />
+        </form>
     )
 }
 

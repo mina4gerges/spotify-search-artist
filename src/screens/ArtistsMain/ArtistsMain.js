@@ -5,6 +5,7 @@ import Artists from './Artists/Artists';
 import SearchComp from '../../components/Search/SearchComp';
 import {SearchArtistProvider} from '../../context/searchArtist';
 import PageNotFound from '../../components/PageNotFound/PageNotFound';
+import CenterMiddlePage from '../../hoc/CenterMiddlePage/CenterMiddlePage';
 
 /**
  * Create artists main component that contains the router
@@ -19,7 +20,9 @@ const ArtistsMain = () => {
         <SearchArtistProvider>
             <Switch>
                 <Route path={`${path}`} exact>
-                    <SearchComp/>
+                    <CenterMiddlePage>
+                        <SearchComp/>
+                    </CenterMiddlePage>
                 </Route>
                 <Route path={`${path}/:searchValue`} exact>
                     <Artists/>

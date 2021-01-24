@@ -1,4 +1,4 @@
-import {CHANGE_SEARCH_VALUE, SUBMIT_SEARCH} from '../constant/actionTypes';
+import {CHANGE_SEARCH_VALUE, SET_SEARCH_ITEM, SUBMIT_SEARCH} from '../constant/actionTypes';
 
 export const handleChange = dispatch => e => {
     dispatch({
@@ -7,7 +7,7 @@ export const handleChange = dispatch => e => {
     });
 }
 
-export const handleSubmit = (dispatch, value, history, path) => e => {
+export const handleSubmit = (dispatch, value, source, history, path) => e => {
     e.preventDefault();
 
     if (!value)
@@ -21,7 +21,12 @@ export const handleSubmit = (dispatch, value, history, path) => e => {
             payload: {error: false}
         });
 
-        history.push(`${path}/${value}`);
+        // standAlone when search component is alone without any other component
+        if (source === 'standAlone')
+            history.push(`${path}/${value}`);
     }
+}
 
+export const setSearchItem = (dispatch, value) => {
+    dispatch({type: SET_SEARCH_ITEM, payload: {value: JSON.parse(value)}});
 }
