@@ -10,22 +10,24 @@ import useStyles from './styles';
 
 /**
  * Create custom card component
+ * @param id
  * @param title
  * @param description
  * @param img
  * @param imgTitle
+ * @param onCardClick
  * @param extraContent
  * @param actions
  * @returns {JSX.Element}
  * @constructor
  */
-const CardComponent = ({title, description, img, imgTitle, extraContent, actions}) => {
+const CardComponent = ({id, title, description, img, imgTitle, onCardClick, extraContent, actions}) => {
 
     const classes = useStyles();
 
     return (
         <Card className={classes.mainCard}>
-            <CardActionArea>
+            <CardActionArea onClick={onCardClick(id)}>
                 <CardMedia
                     image={img}
                     alt={imgTitle}
