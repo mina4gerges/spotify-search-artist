@@ -14,7 +14,7 @@ const Artists = () => {
 
     const {state: {searchResult: artists}} = useContext(SearchArtistContext);
 
-    const classes = useStyles()
+    const classes = useStyles();
 
     return (
         <div className={classes.mainArtists}>

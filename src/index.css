@@ -1,3 +1,8 @@
+html, body, .main-app-container, #root {
+    width: 100%;
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -13,7 +18,5 @@ code {
 }
 
 .main-app-container {
-    width: 100%;
-    height: 100vh;
     background: lightgrey;
 }
