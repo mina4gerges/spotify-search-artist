@@ -5,6 +5,6 @@ export default makeStyles(() => ({
         flexGrow: 1,
         width: '100%',
         height: '100%',
-        overflowX: 'hidden',
+        // overflowX: 'hidden',
     }
 }));
