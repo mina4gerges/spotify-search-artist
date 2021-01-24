@@ -2,7 +2,7 @@ import React from 'react';
 import {useLocation} from 'react-router-dom';
 import CenterMiddlePage from '../../hoc/CenterMiddlePage/CenterMiddlePage';
 
-const Error = ({errorMsg = 'Error Occurred'}) => {
+const Error = ({errorMsg = 'Error Occurred', action}) => {
 
     const {state} = useLocation();
 
@@ -12,6 +12,10 @@ const Error = ({errorMsg = 'Error Occurred'}) => {
     return (
         <CenterMiddlePage>
             {errorMsg}
+            {
+                action &&
+                action
+            }
         </CenterMiddlePage>
     )
 }
