@@ -3,9 +3,14 @@ import Container from '@material-ui/core/Container';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Auth from './screens/Auth/Auth';
 import {AuthProvider} from './context/auth';
-import Artists from './screens/Artists/Artists';
-import PageNotFound from "./components/PageNotFound/PageNotFound";
+import ArtistsMain from './screens/ArtistsMain/ArtistsMain';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
+/**
+ * Main App
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const App = () => {
     return (
         <AuthProvider>
@@ -17,7 +22,7 @@ const App = () => {
                                 <Auth/>
                             </Route>
                             <Route path='/artists'>
-                                <Artists/>
+                                <ArtistsMain/>
                             </Route>
                             <Route path="*">
                                 <PageNotFound/>

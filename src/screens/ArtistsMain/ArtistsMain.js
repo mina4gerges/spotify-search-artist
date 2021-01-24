@@ -1,32 +1,27 @@
 import React from 'react';
 import {Route, Switch, useRouteMatch} from 'react-router-dom';
-import Artist from './Artist/Artist';
+import Artists from './Artists/Artists';
 import SearchComp from '../../components/Search/SearchComp';
 import {SearchArtistProvider} from '../../context/searchArtist';
 import PageNotFound from '../../components/PageNotFound/PageNotFound';
 
 /**
- * Create artists components that contains artists router
+ * Create artists main component that contains the router
  * @returns {JSX.Element}
  * @constructor
  */
-const Artists = () => {
+const ArtistsMain = () => {
 
     const {path} = useRouteMatch();
 
     return (
         <SearchArtistProvider>
             <Switch>
-                <Route path={path} exact>
-                    <div>
-                        hello from artists
-                    </div>
-                </Route>
-                <Route path={`${path}/search`} exact>
+                <Route path={`${path}`} exact>
                     <SearchComp/>
                 </Route>
-                <Route path={`${path}/search/:artist`} exact>
-                    <Artist/>
+                <Route path={`${path}/:artists`} exact>
+                    <Artists/>
                 </Route>
                 <Route path="*">
                     <PageNotFound/>
@@ -36,4 +31,4 @@ const Artists = () => {
     )
 }
 
-export default Artists;
+export default ArtistsMain;

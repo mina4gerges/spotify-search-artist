@@ -9,7 +9,7 @@ import {LOGIN, LOGOUT} from '../constant/actionTypes';
 export const login = (dispatch, history) => () => {
     dispatch({type: LOGIN, payload: true});
 
-    history.push('/artists/search');
+    history.push('/artists');
 }
 
 /**

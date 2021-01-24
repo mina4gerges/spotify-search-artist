@@ -1,15 +1,13 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
 
 const Artist = () => {
 
-    const {artist} = useParams();
-
     return (
         <div>
-            hello from artist - {artist}
+            hello from Artist
         </div>
     )
+
 }
 
 export default Artist;
