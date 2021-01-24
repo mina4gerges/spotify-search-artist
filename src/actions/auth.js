@@ -9,6 +9,8 @@ import {LOGIN, LOGOUT} from '../constant/actionTypes';
 export const login = (dispatch, history) => () => {
     dispatch({type: LOGIN, payload: true});
 
+    localStorage.setItem('isAuthenticated', JSON.stringify(true));
+
     history.push('/artists');
 }
 
@@ -20,6 +22,8 @@ export const login = (dispatch, history) => () => {
  */
 export const logout = (dispatch, history) => () => {
     dispatch({type: LOGOUT, payload: false});
+
+    localStorage.clear();
 
     history.push('/');
 }
