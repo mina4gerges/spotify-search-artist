@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles({
     button: {
-        width: '200px',
+        width: '250px',
         textTransform: 'unset',
 
         paddingRight: 56,

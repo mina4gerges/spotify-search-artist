@@ -1,8 +1,8 @@
 import React from 'react';
 import {useHistory} from "react-router-dom";
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CardComponent from '../../../components/Card/CardComp';
+import ButtonComp from '../../../components/Button/ButtonComp';
 
 import useStyles from './styles';
 
@@ -37,14 +37,16 @@ const getActions = (previewUrl, history, classes) => {
     const onClick = () => window.open(previewUrl, "_blank")
 
     return (
-        <Button
+        <ButtonComp
+            variant='text'
             onClick={onClick}
             className={classes.albumAction}
-        >
-            <Typography variant="body2" color="textSecondary" component="p">
-                Preview on Spotify
-            </Typography>
-        </Button>
+            name={
+                <Typography variant="body2" color="textSecondary" component="p">
+                    Preview on Spotify
+                </Typography>
+            }
+        />
     )
 }
 /**

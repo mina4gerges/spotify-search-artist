@@ -14,6 +14,6 @@ export default makeStyles((theme) => ({
         height: 100
     },
     actions: {
-        background: '#eee'
+        background: 'lightgray'
     }
 }));
