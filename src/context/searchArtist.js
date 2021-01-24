@@ -16,7 +16,7 @@ const initialState = {
     name: 'artistSearch',
     label: 'Search for an artist...',
     searchResult: [
-        {id: 1, name: 'mina', rating: 5, img: icon, followers: 1000},
+        {id: 1, name: 'mina gerges', rating: 5, img: icon, followers: 1000},
         {id: 2, name: 'toto', rating: 3, img: icon, followers: 200},
         {id: 3, name: 'mahabe', rating: 5, img: icon, followers: 10},
         {id: 4, name: 'abdala', rating: 3, img: icon, followers: 123123123},
