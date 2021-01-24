@@ -14,22 +14,20 @@ import PageNotFound from './components/PageNotFound/PageNotFound';
 const App = () => {
     return (
         <AuthProvider>
-            <Container fixed>
-                <div className='main-app-container'>
-                    <BrowserRouter>
-                        <Switch>
-                            <Route path='/' exact>
-                                <Auth/>
-                            </Route>
-                            <Route path='/artists'>
-                                <ArtistsMain/>
-                            </Route>
-                            <Route path="*">
-                                <PageNotFound/>
-                            </Route>
-                        </Switch>
-                    </BrowserRouter>
-                </div>
+            <Container fixed className='main-app-container'>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path='/' exact>
+                            <Auth/>
+                        </Route>
+                        <Route path='/artists'>
+                            <ArtistsMain/>
+                        </Route>
+                        <Route path="*">
+                            <PageNotFound/>
+                        </Route>
+                    </Switch>
+                </BrowserRouter>
             </Container>
         </AuthProvider>
     );

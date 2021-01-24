@@ -20,7 +20,7 @@ const ArtistsMain = () => {
                 <Route path={`${path}`} exact>
                     <SearchComp/>
                 </Route>
-                <Route path={`${path}/:artists`} exact>
+                <Route path={`${path}/:searchValue`} exact>
                     <Artists/>
                 </Route>
                 <Route path="*">

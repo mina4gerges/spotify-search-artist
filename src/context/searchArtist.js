@@ -2,6 +2,7 @@ import React, {createContext, useReducer} from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import searchArtist from '../reducer/searchArtist';
+import icon from '../assets/images/spotify-144.png';
 
 /**
  * Create initial state
@@ -14,6 +15,14 @@ const initialState = {
     id: 'artist-search',
     name: 'artistSearch',
     label: 'Search for an artist...',
+    searchResult: [
+        {id: 1, name: 'mina', rating: 5, img: icon, followers: 1000},
+        {id: 2, name: 'toto', rating: 3, img: icon, followers: 200},
+        {id: 3, name: 'mahabe', rating: 5, img: icon, followers: 10},
+        {id: 4, name: 'abdala', rating: 3, img: icon, followers: 123123123},
+        {id: 5, name: 'amine', rating: 2, img: icon, followers: 12},
+        {id: 6, name: 'big', rating: 1, img: icon, followers: 54},
+    ],
     endAdornment: (
         <IconButton type="submit" aria-label="search">
             <SearchIcon/>
