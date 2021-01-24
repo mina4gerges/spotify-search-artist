@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Artists = () => {
+const InputComponent = () =>{
     return (
         <div>
 
@@ -8,4 +8,4 @@ const Artists = () => {
     )
 }
 
-export default Artists;
+export default InputComponent;
