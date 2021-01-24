@@ -1,6 +1,6 @@
 import React from 'react';
-import {useLocation} from "react-router-dom";
-import CenterMiddlePage from "../../hoc/CenterMiddlePage/CenterMiddlePage";
+import {useLocation} from 'react-router-dom';
+import CenterMiddlePage from '../../hoc/CenterMiddlePage/CenterMiddlePage';
 
 const PageNotFound = () => {
 
@@ -11,7 +11,6 @@ const PageNotFound = () => {
             Page not found {pathname}
         </CenterMiddlePage>
     )
-
 }
 
 export default PageNotFound;
