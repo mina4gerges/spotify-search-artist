@@ -56,7 +56,7 @@ const Artists = () => {
                         ? <Error errorMsg={ARTIST_NOT_FOUND}/>
                         : filteredArtists.map(artist => {
                             return (
-                                <Grid key={artist.id} xs={12} sm={6} md={4} lg={3} item>
+                                <Grid key={`artist-id-${artist.id}`} xs={12} sm={6} md={4} lg={3} item>
                                     <Artist {...artist}/>
                                 </Grid>
                             )

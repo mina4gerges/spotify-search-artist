@@ -9,6 +9,36 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import useStyles from './styles';
 
 /**
+ * Get card body
+ * @param img
+ * @param imgTitle
+ * @param classes
+ * @param title
+ * @param description
+ * @returns {JSX.Element}
+ */
+const getCardBody = ({img, imgTitle, classes, title, description}) => {
+    return (
+        <>
+            <CardMedia
+                image={img}
+                alt={imgTitle}
+                title={imgTitle}
+                className={classes.media}
+            />
+            <CardContent>
+                <Typography gutterBottom variant="h6" component="h2">
+                    {title}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    {description}
+                </Typography>
+            </CardContent>
+        </>
+    )
+}
+
+/**
  * Create custom card component
  * @param id
  * @param title
@@ -27,22 +57,13 @@ const CardComponent = ({id, title, description, img, imgTitle, onCardClick, extr
 
     return (
         <Card className={classes.mainCard}>
-            <CardActionArea onClick={onCardClick(id)}>
-                <CardMedia
-                    image={img}
-                    alt={imgTitle}
-                    title={imgTitle}
-                    className={classes.media}
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {title}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {description}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
+            {
+                onCardClick
+                    ? <CardActionArea onClick={onCardClick(id)}>
+                        {getCardBody({img, imgTitle, classes, title, description})}
+                    </CardActionArea>
+                    : getCardBody({img, imgTitle, classes, title, description})
+            }
 
             {
                 extraContent &&
@@ -53,7 +74,7 @@ const CardComponent = ({id, title, description, img, imgTitle, onCardClick, extr
 
             {
                 actions &&
-                <CardActions>
+                <CardActions className={classes.actions}>
                     {actions}
                 </CardActions>
             }
