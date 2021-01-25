@@ -10,19 +10,23 @@ import {FULL_AUTHENTICATION_URL} from '../constant/spotify';
  */
 export const login = (dispatch, history) => () => {
 
-    // First time login, open Spotify authentication page
-    if (!isAuthenticated())
-        window.open(FULL_AUTHENTICATION_URL, '_self');
+    let isLoading;
 
+    // First time login, open Spotify authentication page
+    if (!isAuthenticated()) {
+        isLoading = true;
+        window.open(FULL_AUTHENTICATION_URL, '_self');
+    }
     // If authenticated before, go to main artists page
     else {
-        dispatch({
-            type: LOGIN,
-            payload: {isLoggedIn: true, name: 'Login'}
-        });
-
+        isLoading = false;
         history.push('/artists');
     }
+
+    dispatch({
+        type: LOGIN,
+        payload: {name: 'login', label: 'Login', isLoading}
+    });
 }
 
 /**
@@ -32,7 +36,7 @@ export const login = (dispatch, history) => () => {
  * @returns {function(): void}
  */
 export const logout = (dispatch, history) => () => {
-    dispatch({type: LOGOUT, payload: {isLoggedIn: false, name: 'Logout'}});
+    dispatch({type: LOGOUT, payload: {name: 'logout', label: 'Logout'}});
 
     localStorage.clear();
 
@@ -47,7 +51,7 @@ export const authenticate = (dispatch, history, search) => {
         history.push('/error', {errorMsg: 'Authentication failed', errorDescription: value, displayActionLink: true});
 
     else if (code === '?code') {
-        dispatch({type: LOGIN, payload: {isLoggedIn: true, name: 'Login'}});
+        dispatch({type: LOGIN, payload: {name: 'login', label: 'Login', isLoading: false}});
 
         localStorage.setItem('token', JSON.stringify(value));
 

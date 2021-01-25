@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 
 const ButtonComponent = ({
                              name,
+                             label,
                              onClick,
                              className,
                              endIcon = null,
@@ -12,14 +13,16 @@ const ButtonComponent = ({
                              variant = 'contained',
                          }) => {
     return (
-        <Button color={color}
-                onClick={onClick}
-                endIcon={endIcon}
-                variant={variant}
-                disabled={disabled}
-                startIcon={startIcon}
-                className={className}>
-            {name}
+        <Button
+            name={name}
+            color={color}
+            onClick={onClick}
+            endIcon={endIcon}
+            variant={variant}
+            disabled={disabled}
+            startIcon={startIcon}
+            className={className}>
+            {label}
         </Button>
     )
 }

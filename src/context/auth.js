@@ -4,17 +4,18 @@ import icon from '../assets/images/spotify-144.png';
 
 /**
  * Create initial state
- * @type {{isLogeIn: boolean, name: string, endIcon: JSX.Element}}
+ * @type {{isLoading: boolean, name: string, endIcon: JSX.Element, label: string}}
  */
 const initialState = {
+    label: 'login',
     name: 'Login',
-    isLogeIn: true,
+    isLoading: false,
     endIcon: <img src={icon} alt='spotify-icon' width={25} height={25}/>
 };
 
 /**
  * Create authentication context
- * @type {React.Context<{isLogeIn: boolean, name: string, endIcon}>}
+ * @type {React.Context<{isLoading: boolean, name: string, endIcon: JSX.Element, label: string}>}
  */
 export const AuthContext = createContext(initialState);
 

@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import CardComponent from '../../../components/Card/CardComp';
 import ButtonComp from '../../../components/Button/ButtonComp';
+import {PREVIEW_ALBUM_MESSAGE} from '../../../constant/messages';
 
 import useStyles from './styles';
 
@@ -40,10 +41,11 @@ const getActions = (previewUrl, history, classes) => {
         <ButtonComp
             variant='text'
             onClick={onClick}
+            name='previewOnSpotify'
             className={classes.albumAction}
-            name={
+            label={
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Preview on Spotify
+                    {PREVIEW_ALBUM_MESSAGE}
                 </Typography>
             }
         />
