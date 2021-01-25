@@ -2,7 +2,7 @@ import React from 'react';
 import {useLocation, useHistory} from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import {GO_TO_LOGIN} from '../../constant/messages';
+import {ERROR_OCCURRED, GO_TO_LOGIN} from '../../constant/messages';
 import CenterMiddlePage from '../../hoc/CenterMiddlePage/CenterMiddlePage';
 
 /**
@@ -13,7 +13,7 @@ import CenterMiddlePage from '../../hoc/CenterMiddlePage/CenterMiddlePage';
  * @returns {JSX.Element}
  * @constructor
  */
-const Error = ({errorMsg = 'Error Occurred', errorDescription = '', action}) => {
+const Error = ({errorMsg = ERROR_OCCURRED, errorDescription = '', action}) => {
 
     const history = useHistory();
 
