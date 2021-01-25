@@ -18,7 +18,7 @@ export const login = (dispatch, history) => () => {
     else {
         dispatch({
             type: LOGIN,
-            payload: {isLoggedIn: true, name: 'Login', token: JSON.parse(localStorage.getItem('token'))}
+            payload: {isLoggedIn: true, name: 'Login'}
         });
 
         history.push('/artists');
@@ -47,7 +47,7 @@ export const authenticate = (dispatch, history, search) => {
         history.push('/error', {errorMsg: 'Authentication failed', errorDescription: value, displayActionLink: true});
 
     else if (code === '?code') {
-        dispatch({type: LOGIN, payload: {isLoggedIn: true, name: 'Login', token: value}});
+        dispatch({type: LOGIN, payload: {isLoggedIn: true, name: 'Login'}});
 
         localStorage.setItem('token', JSON.stringify(value));
 

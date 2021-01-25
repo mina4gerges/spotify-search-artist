@@ -18,12 +18,17 @@ const Auth = () => {
 
     const history = useHistory();
 
+    // search, is a params to get the code and value after authentication with spotify.
+    // After authentication, we will redirected to this page with this param (search)
     const {search} = useLocation();
 
     const {state: {name, endIcon}, dispatch} = useContext(AuthContext);
 
     useEffect(() => {
-        authenticate(dispatch, history, search);
+ 
+        if (search)
+            authenticate(dispatch, history, search);
+
     }, [dispatch, history, search])
 
     return (

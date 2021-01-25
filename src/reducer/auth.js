@@ -8,11 +8,10 @@ import {LOGIN, LOGOUT} from '../constant/actionTypes';
  */
 export const auth = (state, action) => {
 
-    const {isLoggedIn, name, token} = action.payload;
+    const {isLoggedIn, name} = action.payload;
 
     switch (action.type) {
         case LOGIN:
-            return {...state, name, isLoggedIn, token};
         case LOGOUT:
             return {...state, name, isLoggedIn};
         default:
