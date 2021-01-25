@@ -32,7 +32,7 @@ const onCardClick = (history, url, artists) => artistId => () => {
     const artist = artists.find(val => val.id === artistId);
 
     if (artist)
-        history.push(`/artists/${artist.name}/albums`, {artistId});
+        history.push(`/artists/${artist.name}/${artistId}/albums`);
     else
         history.push('/error', {errorMsg: ARTIST_NOT_FOUND});
 }

@@ -34,7 +34,7 @@ const getExtraContent = (releaseDate, tracks) => {
  */
 const getActions = (previewUrl, history, classes) => {
 
-    const onClick = () => window.open(previewUrl, "_blank")
+    const onClick = () => window.open(previewUrl, "_blank");
 
     return (
         <ButtonComp

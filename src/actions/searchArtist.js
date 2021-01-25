@@ -28,5 +28,5 @@ export const handleSubmit = (dispatch, value, source, history, path) => e => {
 }
 
 export const setSearchItem = (dispatch, value) => {
-    dispatch({type: SET_SEARCH_ITEM, payload: {value: JSON.parse(value)}});
+    dispatch({type: SET_SEARCH_ITEM, payload: {value}});
 }

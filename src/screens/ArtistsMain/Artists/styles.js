@@ -12,6 +12,6 @@ export default makeStyles(() => ({
         justifyContent: 'center',
     },
     artistsSearchBody: {
-        height: '100%'
+        height: 'calc(100% - 70px)'
     },
 }));

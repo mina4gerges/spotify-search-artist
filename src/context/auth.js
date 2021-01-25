@@ -7,6 +7,7 @@ import icon from '../assets/images/spotify-144.png';
  * @type {{isLogeIn: boolean, name: string, endIcon: JSX.Element}}
  */
 const initialState = {
+    token: '',
     name: 'Login',
     isLogeIn: true,
     endIcon: <img src={icon} alt='spotify-icon' width={25} height={25}/>

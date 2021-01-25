@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
-import {useLocation} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import Artist from './Artist/Artist';
 import Error from '../../../components/Error/Error';
 import {setSearchItem} from '../../../actions/searchArtist';
@@ -24,26 +24,19 @@ const Artists = () => {
 
     const classes = useStyles();
 
-    const {pathname} = useLocation();
-
-    const [filteredArtists, setFilteredArtists] = useState([]);
+    const {searchValue: searchValueParams} = useParams();
 
     const {state: {value, searchResult: artists}, dispatch} = useContext(SearchArtistContext);
 
-    // This useEffect is used if user refresh the page to reset the search value before the refresh from sessionStorage
+    // This useEffect is used if user refresh the page,
+    // get the new search value from URL
     useEffect(() => {
 
-        const searchArtist = localStorage.getItem('searchArtist');
+        setSearchItem(dispatch, searchValueParams);
 
-        if (searchArtist)
-            setSearchItem(dispatch, searchArtist);
+    }, [dispatch, searchValueParams])
 
-    }, [dispatch, pathname])
-
-    // Set filtered artists
-    useEffect(() => {
-        setFilteredArtists(getFilteredArtists(artists, value));
-    }, [artists, value])
+    const filteredArtists = getFilteredArtists(artists, value);
 
     return (
         <div className={classes.artistsMain}>
@@ -51,17 +44,18 @@ const Artists = () => {
                 <SearchComp source='artists'/>
             </div>
             <div className={classes.artistsSearchBody}>
-                {filteredArtists.length === 0
-                    ? <Error errorMsg={ARTIST_NOT_FOUND}/>
-                    : <Grid container spacing={1}>
-                        {filteredArtists.map(artist => {
-                            return (
-                                <Grid key={`artist-id-${artist.id}`} xs={12} sm={6} md={4} lg={3} item>
-                                    <Artist {...artist}/>
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
+                {
+                    filteredArtists.length === 0
+                        ? <Error errorMsg={ARTIST_NOT_FOUND}/>
+                        : <Grid container spacing={1}>
+                            {filteredArtists.map(artist => {
+                                return (
+                                    <Grid key={`artist-id-${artist.id}`} xs={12} sm={6} md={4} lg={3} item>
+                                        <Artist {...artist}/>
+                                    </Grid>
+                                )
+                            })}
+                        </Grid>
                 }
             </div>
         </div>

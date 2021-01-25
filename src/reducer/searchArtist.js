@@ -8,7 +8,6 @@ const searchArtist = (state, action) => {
         case CHANGE_SEARCH_VALUE:
             return {...state, value, error};
         case SUBMIT_SEARCH:
-            localStorage.setItem('searchArtist', JSON.stringify(state.value));
             return {...state, error};
         case SET_SEARCH_ITEM:
             return {...state, value};
