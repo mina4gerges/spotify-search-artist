@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import {useParams} from 'react-router-dom';
 import Artist from './Artist/Artist';
@@ -24,6 +24,8 @@ const Artists = () => {
 
     const classes = useStyles();
 
+    const [filteredArtists, setFilteredArtists] = useState([]);
+
     const {searchValue: searchValueParams} = useParams();
 
     const {state: {value, searchResult: artists}, dispatch} = useContext(SearchArtistContext);
@@ -36,7 +38,10 @@ const Artists = () => {
 
     }, [dispatch, searchValueParams])
 
-    const filteredArtists = getFilteredArtists(artists, value);
+    // Get filtered artists
+    useEffect(() => {
+        setFilteredArtists(getFilteredArtists(artists, value))
+    }, [artists, value])
 
     return (
         <div className={classes.artistsMain}>
