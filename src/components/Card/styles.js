@@ -2,7 +2,8 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     mainCard: {
-        maxWidth: 275,
+        margin: 'auto',
+        maxWidth: 300,
 
         [theme.breakpoints.only('xs')]: {
             maxWidth: 'unset',

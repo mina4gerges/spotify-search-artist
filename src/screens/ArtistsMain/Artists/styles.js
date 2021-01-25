@@ -1,16 +1,17 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
-    mainArtists: {
-        flexGrow: 1,
+    artistsMain: {
         width: '100%',
         height: '100%',
-        // overflowX: 'hidden',
     },
     artistsSearch: {
         display: 'flex',
+        padding: '10px 0',
         flexDirection: 'row',
         justifyContent: 'center',
-        padding: '10px 0 40px 0',
-    }
+    },
+    artistsSearchBody: {
+        height: '100%'
+    },
 }));

@@ -15,7 +15,7 @@ import PageNotFound from './components/PageNotFound/PageNotFound';
 const App = () => {
     return (
         <AuthProvider>
-            <Container fixed className='main-app-container'>
+            <Container fixed id='main-project-container'>
                 <BrowserRouter>
                     <Switch>
                         <Route path='/' exact>

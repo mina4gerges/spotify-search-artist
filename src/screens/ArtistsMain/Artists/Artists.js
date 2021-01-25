@@ -46,23 +46,24 @@ const Artists = () => {
     }, [artists, value])
 
     return (
-        <div className={classes.mainArtists}>
+        <div className={classes.artistsMain}>
             <div className={classes.artistsSearch}>
                 <SearchComp source='artists'/>
             </div>
-            <Grid container spacing={2}>
-                {
-                    filteredArtists.length === 0
-                        ? <Error errorMsg={ARTIST_NOT_FOUND}/>
-                        : filteredArtists.map(artist => {
+            <div className={classes.artistsSearchBody}>
+                {filteredArtists.length === 0
+                    ? <Error errorMsg={ARTIST_NOT_FOUND}/>
+                    : <Grid container spacing={1}>
+                        {filteredArtists.map(artist => {
                             return (
                                 <Grid key={`artist-id-${artist.id}`} xs={12} sm={6} md={4} lg={3} item>
                                     <Artist {...artist}/>
                                 </Grid>
                             )
-                        })
+                        })}
+                    </Grid>
                 }
-            </Grid>
+            </div>
         </div>
     )
 }
