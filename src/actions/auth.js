@@ -7,7 +7,7 @@ import {LOGIN, LOGOUT} from '../constant/actionTypes';
  * @returns {function(): void}
  */
 export const login = (dispatch, history) => () => {
-    dispatch({type: LOGIN, payload: true});
+    dispatch({type: LOGIN, payload: {isLoggedIn: true, name: 'Login'}});
 
     localStorage.setItem('isAuthenticated', JSON.stringify(true));
 
@@ -21,7 +21,7 @@ export const login = (dispatch, history) => () => {
  * @returns {function(): void}
  */
 export const logout = (dispatch, history) => () => {
-    dispatch({type: LOGOUT, payload: false});
+    dispatch({type: LOGOUT, payload: {isLoggedIn: false, name: 'Logout'}});
 
     localStorage.clear();
 

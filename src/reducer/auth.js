@@ -7,11 +7,14 @@ import {LOGIN, LOGOUT} from '../constant/actionTypes';
  * @returns {(*&{isLogeIn, name: string})|*}
  */
 export const auth = (state, action) => {
+
+    const {isLoggedIn, name} = action.payload;
+
     switch (action.type) {
         case LOGIN:
-            return {...state, name: 'Login', isLogeIn: action.payload};
+            return {...state, name, isLoggedIn};
         case LOGOUT:
-            return {...state, name: 'Logout', isLogeIn: action.payload};
+            return {...state, name, isLoggedIn};
         default:
             return state;
     }
