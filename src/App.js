@@ -6,6 +6,7 @@ import {AuthProvider} from './context/auth';
 import Error from './components/Error/Error';
 import ArtistsMain from './screens/ArtistsMain/ArtistsMain';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import AuthenticatedComp from './hoc/AuthenticatedComp/AuthenticatedComp';
 
 /**
  * Main App
@@ -22,13 +23,19 @@ const App = () => {
                             <Auth/>
                         </Route>
                         <Route path='/artists'>
-                            <ArtistsMain/>
+                            <AuthenticatedComp>
+                                <ArtistsMain/>
+                            </AuthenticatedComp>
                         </Route>
                         <Route path='/error'>
-                            <Error/>
+                            <AuthenticatedComp>
+                                <Error/>
+                            </AuthenticatedComp>
                         </Route>
                         <Route path="*">
-                            <PageNotFound/>
+                            <AuthenticatedComp>
+                                <PageNotFound/>
+                            </AuthenticatedComp>
                         </Route>
                     </Switch>
                 </BrowserRouter>
