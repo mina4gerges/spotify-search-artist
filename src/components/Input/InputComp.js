@@ -1,46 +1,115 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import useStyles from './styles';
+import IconButton from "@material-ui/core/IconButton";
+
+const adornment = (adornmentIcon, onClick) => {
+    return (
+        <InputAdornment position='start'>
+            <IconButton type='submit' aria-label="search" onClick={onClick}>
+                {adornmentIcon}
+            </IconButton>
+        </InputAdornment>
+    )
+}
 
 /**
  * Create global input component
  * @param id
  * @param name
- * @param value
  * @param label
  * @param handleChange
+ * @param prevValue
  * @param type
  * @param className
  * @param helperText
- * @param error
  * @param disabled
  * @param required
  * @param multiline
  * @param endAdornment
  * @param startAdornment
+ * @param prevError
  * @returns {JSX.Element}
  * @constructor
  */
 const InputComponent = ({
                             id,
                             name,
-                            value,
                             label,
                             handleChange,
+                            value: prevValue,
                             type = 'text',
                             className = '',
                             helperText = '',
-                            error = false,
                             disabled = false,
                             required = false,
                             multiline = false,
                             endAdornment = null,
                             startAdornment = null,
+                            error: prevError = false,
                         }) => {
 
     const classes = useStyles();
+
+    const [value, setValue] = useState('');
+
+    const [error, setError] = useState(false);
+
+    // Update component value with the value sent using props
+    useEffect(() => {
+        if (prevValue)
+            setValue(prevValue);
+    }, [prevValue])
+
+    // Update component error with the error sent using props
+    useEffect(() => {
+        setError(prevError);
+    }, [prevError])
+
+    // Update input value to parent component after 1s
+    // Prevent updating value on each key down
+    useEffect(() => {
+
+        const triggerChange = () => {
+            console.log("after 5s", value)
+            handleChange(value)
+            clearTimeout(timer);
+        }
+
+        const timer = setTimeout(triggerChange, 5000);
+
+        // Clean up
+        return () => {
+            clearTimeout(timer);
+        }
+
+    }, [handleChange, value])
+
+    const handleKeyDown = e => {
+
+        // User pressed on enter
+        if (e.keyCode === 13) {
+
+            if (value)
+                setError(false);
+            else
+                setError(true);
+
+            handleChange(value);
+        }
+    }
+
+    const onChange = e => {
+
+        if (error)
+            setError(false);
+
+        setValue(e.target.value);
+    }
+
+    const onIconClick = () => handleChange(value);
 
     return (
         <TextField
@@ -51,22 +120,17 @@ const InputComponent = ({
             error={error}
             value={value}
             variant='outlined'
+            onChange={onChange}
             multiline={multiline}
-            onChange={handleChange}
             helperText={helperText}
+            onKeyDown={handleKeyDown}
             className={`${classes.margin} ${className}`}
             InputProps={{
                 type,
                 required,
                 disabled,
-                startAdornment:
-                    startAdornment
-                        ? <InputAdornment position='start'>{startAdornment}</InputAdornment>
-                        : null,
-                endAdornment:
-                    endAdornment
-                        ? <InputAdornment position='end'>{endAdornment}</InputAdornment>
-                        : null
+                startAdornment: startAdornment ? adornment(startAdornment, onIconClick) : null,
+                endAdornment: endAdornment ? adornment(endAdornment, onIconClick) : null
             }}
         />
     )

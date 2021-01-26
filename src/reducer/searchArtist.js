@@ -5,14 +5,14 @@ const searchArtist = (state, action) => {
     switch (action.type) {
 
         case CHANGE_SEARCH_VALUE:
-            return {...state, value: action.payload.value, error: false};
+            return {...state, value: action.payload.value};
 
         case SET_SEARCH_RESULT:
             return {...state, searchResult: action.payload.searchResult, isSearching: false};
 
         case SUBMIT_SEARCH:
             // On submit clear old searchResult and wait for new results (isSearching true)
-            return {...state, error: !state.value, searchResult: [], isSearching: true};
+            return {...state, searchResult: [], isSearching: true};
 
         case SET_SEARCH_ITEM:
             return {...state, value: action.payload.value};

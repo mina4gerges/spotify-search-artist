@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useCallback, useContext} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import InputComponent from '../Input/InputComp';
 import {SearchArtistContext} from '../../context/searchArtist';
@@ -19,7 +19,11 @@ const SearchComponent = ({source = 'standAlone'}) => {
 
     const {path} = useRouteMatch();
 
-    const {state: {id, name, type, label, value, error, endAdornment}, dispatch} = useContext(SearchArtistContext);
+    const {state: {id, name, type, label, value, endAdornment}, dispatch} = useContext(SearchArtistContext);
+
+    const handleChangeCallBack = useCallback(value => {
+        handleChange(dispatch, value);
+    }, [dispatch])
 
     return (
         <form onSubmit={handleSubmit(dispatch, value, source, history, path)}>
@@ -29,10 +33,9 @@ const SearchComponent = ({source = 'standAlone'}) => {
                 type={type}
                 label={label}
                 value={value}
-                error={error}
                 endAdornment={endAdornment}
                 className={classes.inputWidth}
-                handleChange={handleChange(dispatch)}
+                handleChange={handleChangeCallBack}
             />
         </form>
     )

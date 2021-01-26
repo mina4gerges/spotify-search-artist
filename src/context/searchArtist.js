@@ -1,26 +1,20 @@
 import React, {createContext, useReducer} from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import searchArtist from '../reducer/searchArtist';
 
 /**
  * Create initial state
- * @type {{endAdornment: JSX.Element, name: string, id: string, label: string, type: string, error: boolean, value: string}}
+ * @type {{endAdornment: JSX.Element, name: string, id: string, label: string, type: string, value: string}}
  */
 const initialState = {
     value: '',
-    error: false,
     type: 'search',
     searchResult: [],
     isSearching: false,
     id: 'artist-search',
     name: 'artistSearch',
     label: 'Search for an artist...',
-    endAdornment: (
-        <IconButton type="submit" aria-label="search">
-            <SearchIcon/>
-        </IconButton>
-    ),
+    endAdornment: <SearchIcon/>
 }
 
 /**

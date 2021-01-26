@@ -1,10 +1,7 @@
 import {getSearchArtist} from '../api';
 import {CHANGE_SEARCH_VALUE, SET_SEARCH_ITEM, SET_SEARCH_RESULT, SUBMIT_SEARCH} from '../constant/actionTypes';
 
-export const handleChange = dispatch => e => {
-
-    const {value} = e.target;
-
+export const handleChange = (dispatch, value) => {
     dispatch({
         type: CHANGE_SEARCH_VALUE,
         payload: {value}
