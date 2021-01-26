@@ -4,6 +4,7 @@
  */
 
 export const GO_BACK = 'Go back';
+export const LOADING = 'Loading...';
 export const DATA_NOT_FOUND = 'Data not found';
 export const ERROR_OCCURRED = 'Error Occurred';
 export const ARTIST_NOT_FOUND = 'Artist not found';

@@ -5,15 +5,22 @@ const searchArtist = (state, action) => {
     switch (action.type) {
 
         case CHANGE_SEARCH_VALUE:
-            return {...state, value: action.payload.value};
+            return {...state, value: action.payload.value, isSearchingOnChange: !!action.payload.value};
 
         case SET_SEARCH_RESULT:
-            return {...state, searchResult: action.payload.searchResult, isSearching: false};
+            return {
+                ...state,
+                isSearching: false,
+                isSearchingOnChange: false,
+                searchResult: action.payload.searchResult,
+            };
 
         case SUBMIT_SEARCH:
+            const isValueEmpty = !state.value;
+
             // On submit, if value is not empty,
             // clear old searchResult and wait for new results (isSearching true)
-            return {...state, searchResult: state.value ? [] : state.searchResult, isSearching: !!state.value};
+            return {...state, searchResult: isValueEmpty ? state.searchResult : [], isSearching: !isValueEmpty};
 
         case SET_SEARCH_ITEM:
             return {...state, value: action.payload.value};

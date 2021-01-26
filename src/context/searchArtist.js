@@ -13,8 +13,9 @@ const initialState = {
     isSearching: false,
     id: 'artist-search',
     name: 'artistSearch',
+    isSearchingOnChange: false,
+    endAdornment: <SearchIcon/>,
     label: 'Search for an artist...',
-    endAdornment: <SearchIcon/>
 }
 
 /**
