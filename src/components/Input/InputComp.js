@@ -72,6 +72,10 @@ const InputComponent = ({
     // Prevent updating value on each key down
     useEffect(() => {
 
+        // Prevent on the first load of the component to call handleChange
+        if (value === prevValue)
+            return
+
         const triggerChange = () => {
             handleChange(value);
 
@@ -85,7 +89,7 @@ const InputComponent = ({
             clearTimeout(timer);
         }
 
-    }, [handleChange, value])
+    }, [handleChange, prevValue, value])
 
 
     const onChange = e => {
