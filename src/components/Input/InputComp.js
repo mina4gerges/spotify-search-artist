@@ -68,17 +68,17 @@ const InputComponent = ({
         setError(prevError);
     }, [prevError])
 
-    // Update input value to parent component after 1s
+    // Update input value to parent component after 0.5s
     // Prevent updating value on each key down
     useEffect(() => {
 
         const triggerChange = () => {
-            console.log("after 5s", value)
-            handleChange(value)
+            handleChange(value);
+
             clearTimeout(timer);
         }
 
-        const timer = setTimeout(triggerChange, 5000);
+        const timer = setTimeout(triggerChange, 500);
 
         // Clean up
         return () => {
