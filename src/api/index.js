@@ -4,6 +4,7 @@ import {CLIENT_ID, REDIRECT_URI, SECRET_ID} from "../constant/spotify";
 
 const encodedData = window.btoa(`${CLIENT_ID}:${SECRET_ID}`);
 
+// Get token to be used if search requests
 export const getToken = code => axios.post(
     'https://accounts.spotify.com/api/token',
     qs.stringify({
