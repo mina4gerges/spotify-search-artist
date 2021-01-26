@@ -1,12 +1,11 @@
 import React, {useContext, useEffect} from 'react';
-import Grid from '@material-ui/core/Grid';
 import {useParams} from 'react-router-dom';
 import Artist from './Artist/Artist';
-import Error from '../../../components/Error/Error';
 import Loading from '../../../components/Loading/Loading';
 import {setSearchItem} from '../../../actions/searchArtist';
 import SearchComp from '../../../components/Search/SearchComp';
 import {SearchArtistContext} from '../../../context/searchArtist';
+import GridListComp from '../../../components/GridList/GridListComp';
 import CenterMiddlePage from '../../../hoc/CenterMiddlePage/CenterMiddlePage';
 import {ARTIST_NOT_FOUND, SEARCHING_ARTISTS} from '../../../constant/messages';
 
@@ -50,19 +49,11 @@ const Artists = () => {
                 <SearchComp source='artists'/>
             </div>
             <div className={classes.artistsSearchBody}>
-                {
-                    artists.length === 0
-                        ? <Error errorMsg={ARTIST_NOT_FOUND}/>
-                        : <Grid container spacing={1}>
-                            {artists.map(artist => {
-                                return (
-                                    <Grid key={`artist-id-${artist.id}`} xs={12} sm={6} md={4} lg={3} item>
-                                        <Artist {...artist}/>
-                                    </Grid>
-                                )
-                            })}
-                        </Grid>
-                }
+                <GridListComp
+                    data={artists}
+                    RenderItemComp={Artist}
+                    errorMsg={ARTIST_NOT_FOUND}
+                />
             </div>
         </div>
     )
