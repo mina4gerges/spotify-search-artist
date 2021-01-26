@@ -57,6 +57,7 @@ export const authenticate = (dispatch, history, search) => {
         const oldToken = localStorage.getItem('token');
 
         // Get new token
+        // If token already exists, do not request a new one
         if (!oldToken) {
 
             getToken(value).then(result => {
