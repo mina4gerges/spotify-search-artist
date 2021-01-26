@@ -1,14 +1,15 @@
 import React, {createContext, useReducer} from 'react';
 import {auth} from '../reducer/auth';
-import icon from '../assets/images/spotify-144.png';
+
+import icon from '../assets/images/spotify-320.png';
 
 /**
  * Create initial state
  * @type {{isLoading: boolean, name: string, endIcon: JSX.Element, label: string}}
  */
 const initialState = {
-    label: 'login',
-    name: 'Login',
+    label: 'Login',
+    name: 'login',
     isLoading: false,
     endIcon: <img src={icon} alt='spotify-icon' width={25} height={25}/>
 };

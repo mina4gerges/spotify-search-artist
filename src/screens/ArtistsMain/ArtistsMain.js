@@ -1,7 +1,9 @@
-import React from 'react';
-import {Route, Switch, useRouteMatch} from 'react-router-dom';
+import React, {useContext, useEffect} from 'react';
+import {Route, Switch, useHistory, useLocation, useRouteMatch} from 'react-router-dom';
 import Albums from '../Albums/Albums';
 import Artists from './Artists/Artists';
+import {AuthContext} from '../../context/auth';
+import {authenticate} from '../../actions/auth';
 import SearchComp from '../../components/Search/SearchComp';
 import {SearchArtistProvider} from '../../context/searchArtist';
 import PageNotFound from '../../components/PageNotFound/PageNotFound';
@@ -15,6 +17,21 @@ import CenterMiddlePage from '../../hoc/CenterMiddlePage/CenterMiddlePage';
 const ArtistsMain = () => {
 
     const {path} = useRouteMatch();
+
+    const history = useHistory();
+
+    // search, is a params to get the code and value after authentication with spotify.
+    // After authentication, we will redirected to this page
+    const {search} = useLocation();
+
+    const {dispatch} = useContext(AuthContext);
+
+    useEffect(() => {
+
+        if (search)
+            authenticate(dispatch, history, search);
+
+    }, [dispatch, history, search])
 
     return (
         <SearchArtistProvider>

@@ -1,18 +1,15 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export default makeStyles((theme) => ({
+export default makeStyles(() => ({
     mainCard: {
-        margin: 'auto',
         maxWidth: 300,
-
-        [theme.breakpoints.only('xs')]: {
-            maxWidth: 'unset',
-            textAlign: 'center',
-        },
+        margin: 'auto',
+        height: '500px',
+        position: 'relative'
     },
-    media: {
-        width: 100,
-        height: 100
+    extraContent: {
+        bottom: 5,
+        position: 'absolute'
     },
     actions: {
         background: 'lightgray'

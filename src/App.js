@@ -23,14 +23,10 @@ const App = () => {
                             <Auth/>
                         </Route>
                         <Route path='/artists'>
-                            <AuthenticatedComp>
-                                <ArtistsMain/>
-                            </AuthenticatedComp>
+                            <ArtistsMain/>
                         </Route>
                         <Route path='/error'>
-                            <AuthenticatedComp>
-                                <Error/>
-                            </AuthenticatedComp>
+                            <Error/>
                         </Route>
                         <Route path="*">
                             <AuthenticatedComp>

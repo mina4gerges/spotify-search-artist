@@ -12,19 +12,20 @@ import useStyles from './styles';
  * Get card body
  * @param img
  * @param imgTitle
- * @param classes
  * @param title
  * @param description
  * @returns {JSX.Element}
  */
-const getCardBody = ({img, imgTitle, classes, title, description}) => {
+const getCardBody = ({img, imgTitle, title, description}) => {
     return (
         <>
             <CardMedia
                 image={img}
+                width='320'
+                height='320'
                 alt={imgTitle}
+                component='img'
                 title={imgTitle}
-                className={classes.media}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -60,14 +61,14 @@ const CardComponent = ({id, title, description, img, imgTitle, onCardClick, extr
             {
                 onCardClick
                     ? <CardActionArea onClick={onCardClick(id)}>
-                        {getCardBody({img, imgTitle, classes, title, description})}
+                        {getCardBody({img, imgTitle, title, description})}
                     </CardActionArea>
-                    : getCardBody({img, imgTitle, classes, title, description})
+                    : getCardBody({img, imgTitle, title, description})
             }
 
             {
                 extraContent &&
-                <CardContent>
+                <CardContent className={!actions ? classes.extraContent : null}>
                     {extraContent}
                 </CardContent>
             }

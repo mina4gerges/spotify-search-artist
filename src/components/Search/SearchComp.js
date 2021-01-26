@@ -16,6 +16,7 @@ const SearchComponent = ({source = 'standAlone'}) => {
     const classes = useStyles();
 
     const history = useHistory();
+
     const {path} = useRouteMatch();
 
     const {state: {id, name, type, label, value, error, endAdornment}, dispatch} = useContext(SearchArtistContext);

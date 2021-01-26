@@ -6,6 +6,8 @@ import CardComponent from '../../../../components/Card/CardComp';
 import {SearchArtistContext} from '../../../../context/searchArtist';
 import RatingComponent from '../../../../components/Rating/RatingComp';
 
+import icon from '../../../../assets/images/spotify-320.png';
+
 /**
  * Get more content to be displayed
  * @param rating
@@ -46,7 +48,7 @@ const onCardClick = (history, url, artists) => artistId => () => {
  * @returns {JSX.Element}
  * @constructor
  */
-const Artist = ({id, name: title, followers, img, rating}) => {
+const Artist = ({id, name: title, followers, images: img, popularity: rating}) => {
 
     const history = useHistory();
 
@@ -57,12 +59,12 @@ const Artist = ({id, name: title, followers, img, rating}) => {
     return (
         <CardComponent
             id={id}
-            img={img}
             title={title}
             imgTitle={title}
             extraContent={getExtraContent(rating)}
-            description={getDescription(followers)}
+            img={img.length !== 0 ? img[0]?.url : icon}
             onCardClick={onCardClick(history, url, artists)}
+            description={getDescription(followers?.total ?? 0)}
         />
     )
 }

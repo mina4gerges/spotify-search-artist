@@ -1,5 +1,7 @@
+import {getToken} from '../api';
 import {isAuthenticated} from '../global/functions';
 import {LOGIN, LOGOUT} from '../constant/actionTypes';
+import {AUTHENTICATION_FAILED} from '../constant/messages';
 import {FULL_AUTHENTICATION_URL} from '../constant/spotify';
 
 /**
@@ -25,7 +27,7 @@ export const login = (dispatch, history) => () => {
 
     dispatch({
         type: LOGIN,
-        payload: {name: 'login', label: 'Login', isLoading}
+        payload: {isLoading}
     });
 }
 
@@ -36,7 +38,7 @@ export const login = (dispatch, history) => () => {
  * @returns {function(): void}
  */
 export const logout = (dispatch, history) => () => {
-    dispatch({type: LOGOUT, payload: {name: 'logout', label: 'Logout'}});
+    dispatch({type: LOGOUT, payload: {isLoading: false}});
 
     localStorage.clear();
 
@@ -48,13 +50,27 @@ export const authenticate = (dispatch, history, search) => {
     const [code, value] = search.split('=');
 
     if (code === '?error')
-        history.push('/error', {errorMsg: 'Authentication failed', errorDescription: value, displayActionLink: true});
+        history.push('/error', {errorMsg: AUTHENTICATION_FAILED, errorDescription: value, displayActionLink: true});
 
     else if (code === '?code') {
-        dispatch({type: LOGIN, payload: {name: 'login', label: 'Login', isLoading: false}});
 
-        localStorage.setItem('token', JSON.stringify(value));
+        const oldToken = localStorage.getItem('token');
 
-        history.push('/artists');
+        // Get new token
+        if (!oldToken) {
+
+            getToken(value).then(result => {
+
+                localStorage.setItem('token', JSON.stringify(result.data));
+
+            }).catch(e => {
+                let errorDescription = null;
+
+                if (e?.response?.data?.error)
+                    errorDescription = e.response.data.error;
+
+                history.push('/error', {errorDescription, displayActionLink: true});
+            })
+        }
     }
 }
