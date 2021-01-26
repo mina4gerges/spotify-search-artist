@@ -1,4 +1,4 @@
-import {CHANGE_SEARCH_VALUE, SET_SEARCH_ITEM, SET_SEARCH_RESULT, SUBMIT_SEARCH} from '../constant/actionTypes';
+import {CHANGE_SEARCH_VALUE, SET_SEARCH_ITEM, SET_SEARCH_RESULT, SUBMIT_SEARCH,SET_SEARCHING} from '../constant/actionTypes';
 
 const searchArtist = (state, action) => {
 
@@ -6,6 +6,9 @@ const searchArtist = (state, action) => {
 
         case CHANGE_SEARCH_VALUE:
             return {...state, value: action.payload.value, isSearchingOnChange: !!action.payload.value};
+
+        case SET_SEARCHING:
+            return {...state, isSearching:true};
 
         case SET_SEARCH_RESULT:
             return {
