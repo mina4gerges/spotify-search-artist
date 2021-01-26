@@ -87,19 +87,6 @@ const InputComponent = ({
 
     }, [handleChange, value])
 
-    const handleKeyDown = e => {
-
-        // User pressed on enter
-        if (e.keyCode === 13) {
-
-            if (value)
-                setError(false);
-            else
-                setError(true);
-
-            handleChange(value);
-        }
-    }
 
     const onChange = e => {
 
@@ -109,7 +96,27 @@ const InputComponent = ({
         setValue(e.target.value);
     }
 
-    const onIconClick = () => handleChange(value);
+    // Triggered when user press on enter
+    const handleKeyDown = e => {
+
+        // User pressed on enter
+        if (e.keyCode === 13)
+            updateValue();
+    }
+
+    // Triggered when user press on the icon button
+    const onIconClick = () =>
+        updateValue();
+
+    const updateValue = () => {
+
+        if (value)
+            setError(false);
+        else
+            setError(true);
+
+        handleChange(value);
+    }
 
     return (
         <TextField

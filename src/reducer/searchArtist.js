@@ -11,8 +11,9 @@ const searchArtist = (state, action) => {
             return {...state, searchResult: action.payload.searchResult, isSearching: false};
 
         case SUBMIT_SEARCH:
-            // On submit clear old searchResult and wait for new results (isSearching true)
-            return {...state, searchResult: [], isSearching: true};
+            // On submit, if value is not empty,
+            // clear old searchResult and wait for new results (isSearching true)
+            return {...state, searchResult: state.value ? [] : state.searchResult, isSearching: !!state.value};
 
         case SET_SEARCH_ITEM:
             return {...state, value: action.payload.value};
