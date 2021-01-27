@@ -25,6 +25,8 @@ const Albums = () => {
 
     const [albums, setAlbums] = useState([]);
 
+    const [artistName, setArtistName] = useState('');
+
     const [isFirstLoading, setIsFirstLoading] = useState(true);
 
     // Get artist albums
@@ -36,12 +38,20 @@ const Albums = () => {
             getArtistAlbums(token?.access_token, artistId)
                 .then(result => {
 
-                    setAlbums(result.data.items);
+                    const albums = result.data.items;
+
+                    // Get the first artist (artists[0]),
+                    // because we may have different artist for one album
+                    if (albums.length > 0)
+                        setArtistName(albums[0]?.artists[0]?.name);
+
+                    setAlbums(albums);
                     setIsFirstLoading(false);
 
                 })
                 .catch(e => {
 
+                    setArtistName('');
                     setAlbums([]);
                     setIsFirstLoading(false);
 
@@ -74,14 +84,11 @@ const Albums = () => {
             </CenterMiddlePage>
         )
 
-    // Artist name
-    const name = JSON.parse(localStorage.getItem('artist'))?.name ?? '';
-
     return (
         <div className={classes.albumsMain}>
             <div className={classes.albumsHeader}>
                 <Typography variant="h5" className={classes.artistName}>
-                    {name}
+                    {artistName}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
                     Albums
