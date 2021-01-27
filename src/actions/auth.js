@@ -50,7 +50,7 @@ export const authenticate = (dispatch, history, search) => {
     const [code, value] = search.split('=');
 
     if (code === '?error')
-        history.push('/error', {errorMsg: AUTHENTICATION_FAILED, errorDescription: value, displayActionLink: true});
+        history.push('/error', {errorMsg: AUTHENTICATION_FAILED, errorDescription: value, action: {type: 'login'}});
 
     else if (code === '?code') {
 
@@ -70,7 +70,7 @@ export const authenticate = (dispatch, history, search) => {
                 if (e?.response?.data?.error)
                     errorDescription = e.response.data.error;
 
-                history.push('/error', {errorDescription, displayActionLink: true});
+                history.push('/error', {errorDescription, action: {type: 'login'}});
             })
         }
     }

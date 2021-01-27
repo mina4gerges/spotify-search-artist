@@ -8,6 +8,8 @@ import RatingComponent from '../../../../components/Rating/RatingComp';
 
 import icon from '../../../../assets/images/spotify-320.png';
 
+// TODO: fix on submit persists search value pn refresh
+
 /**
  * Get more content to be displayed
  * @param rating
@@ -33,9 +35,10 @@ const onCardClick = (history, url, artists) => artistId => () => {
 
     const artist = artists.find(val => val.id === artistId);
 
-    if (artist)
-        history.push(`/artists/${artist.name}/${artistId}/albums`);
-    else
+    if (artist) {
+        localStorage.setItem('artist', JSON.stringify({name: artist.name, id: artist.id}));
+        history.push(`/artists/${artistId}/albums`);
+    } else
         history.push('/error', {errorMsg: ARTIST_NOT_FOUND});
 }
 

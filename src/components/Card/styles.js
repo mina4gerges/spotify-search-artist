@@ -4,7 +4,7 @@ export default makeStyles(() => ({
     mainCard: {
         maxWidth: 300,
         margin: 'auto',
-        height: '500px',
+        minHeight: '500px',
         position: 'relative'
     },
     extraContent: {

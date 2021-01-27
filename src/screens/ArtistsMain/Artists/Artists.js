@@ -1,8 +1,9 @@
-import React, {useContext, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
+import {useHistory, useParams} from 'react-router-dom';
 import Artist from './Artist/Artist';
+import {getSearchArtist} from '../../../api';
 import Loading from '../../../components/Loading/Loading';
-import {setSearchItem} from '../../../actions/searchArtist';
+import {setSearchItem, setSearchResults} from '../../../actions/searchArtist';
 import SearchComp from '../../../components/Search/SearchComp';
 import {SearchArtistContext} from '../../../context/searchArtist';
 import GridListComp from '../../../components/GridList/GridListComp';
@@ -20,11 +21,15 @@ const Artists = () => {
 
     const classes = useStyles();
 
-    // const [filteredArtists, setFilteredArtists] = useState([]);
-
     const {searchValue: searchValueParams} = useParams();
 
-    const {state: {searchResult: artists, isSearching}, dispatch} = useContext(SearchArtistContext);
+    const [isFirstLoading, setIsFirstLoading] = useState(true);
+
+    const [isLoadingOnSearch, setIsLoadingOnSearch] = useState(false);
+
+    const history = useHistory();
+
+    const {state: {value, searchResult: artists, fetchNewValues}, dispatch} = useContext(SearchArtistContext);
 
     // This useEffect is used if user refresh the page,
     // get the new search value from URL
@@ -34,9 +39,53 @@ const Artists = () => {
 
     }, [dispatch, searchValueParams])
 
-    console.log("artists", artists)
+    useEffect(() => {
 
-    if (isSearching)
+        if (!fetchNewValues)
+            return;
+
+        const token = JSON.parse(localStorage.getItem('token'));
+
+        if (!isFirstLoading)
+            setIsLoadingOnSearch(true);
+
+        getSearchArtist(token?.access_token, value)
+            .then(result => {
+
+                setIsFirstLoading(false);
+                setIsLoadingOnSearch(false);
+
+                setSearchResults(dispatch, result?.data?.artists?.items ?? [])
+
+            })
+            .catch(e => {
+                setSearchResults(dispatch, []);
+
+                setIsFirstLoading(false);
+                setIsLoadingOnSearch(false);
+
+                // If error from Spotify
+                if (e?.response?.data?.error) {
+                    const {status, message} = e.response.data.error;
+
+                    // status === 401
+                    // Unauthorized. Expired or invalid session
+                    if (status === 401) {
+                        localStorage.clear();
+                        history.push('/error', {action: {type: 'login'}, errorDescription: message});
+                    }
+                    else
+                        history.push('/error', {action: {type: 'login'}, errorDescription: message});
+
+                } else {
+                    console.error(e.message);
+                    history.push('/error', {action: {type: 'login'}});
+                }
+            })
+
+    }, [dispatch, history, isFirstLoading, value, fetchNewValues])
+
+    if (isFirstLoading)
         return (
             <CenterMiddlePage>
                 <Loading loadingMessage={SEARCHING_ARTISTS}/>
@@ -45,9 +94,16 @@ const Artists = () => {
 
     return (
         <div className={classes.artistsMain}>
+
             <div className={classes.artistsSearch}>
                 <SearchComp source='artists'/>
             </div>
+
+            {
+                isLoadingOnSearch &&
+                <Loading type='linear'/>
+            }
+
             <div className={classes.artistsSearchBody}>
                 <GridListComp
                     data={artists}

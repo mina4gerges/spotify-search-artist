@@ -1,32 +1,20 @@
-import {CHANGE_SEARCH_VALUE, SET_SEARCH_ITEM, SET_SEARCH_RESULT, SUBMIT_SEARCH,SET_SEARCHING} from '../constant/actionTypes';
+import {CHANGE_SEARCH_VALUE, SUBMIT_SEARCH, SET_SEARCH_ITEM, SET_SEARCH_RESULT} from '../constant/actionTypes';
 
 const searchArtist = (state, action) => {
 
     switch (action.type) {
 
         case CHANGE_SEARCH_VALUE:
-            return {...state, value: action.payload.value, isSearchingOnChange: !!action.payload.value};
-
-        case SET_SEARCHING:
-            return {...state, isSearching:true};
+            return {...state, value: action.payload.value, fetchNewValues: !!action.payload.value};
 
         case SET_SEARCH_RESULT:
-            return {
-                ...state,
-                isSearching: false,
-                isSearchingOnChange: false,
-                searchResult: action.payload.searchResult,
-            };
-
-        case SUBMIT_SEARCH:
-            const isValueEmpty = !state.value;
-
-            // On submit, if value is not empty,
-            // clear old searchResult and wait for new results (isSearching true)
-            return {...state, searchResult: isValueEmpty ? state.searchResult : [], isSearching: !isValueEmpty};
+            return {...state, searchResult: action.payload.searchResult, fetchNewValues: false};
 
         case SET_SEARCH_ITEM:
-            return {...state, value: action.payload.value};
+            return {...state, value: action.payload.value, fetchNewValues: !!action.payload.value};
+
+        case SUBMIT_SEARCH:
+            return {...state, fetchNewValues: !!state.value};
 
         default:
             return state;

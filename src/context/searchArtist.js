@@ -10,10 +10,9 @@ const initialState = {
     value: '',
     type: 'search',
     searchResult: [],
-    isSearching: false,
     id: 'artist-search',
     name: 'artistSearch',
-    isSearchingOnChange: false,
+    fetchNewValues: false,
     endAdornment: <SearchIcon/>,
     label: 'Search for an artist...',
 }

@@ -8,7 +8,6 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
 // Search artist action types
-export const SET_SEARCHING = 'SET_SEARCHING';
 export const SUBMIT_SEARCH = 'SUBMIT_SEARCH';
 export const SET_SEARCH_ITEM = 'SET_SEARCH_ITEM';
 export const SET_SEARCH_RESULT = 'SET_SEARCH_RESULT';
