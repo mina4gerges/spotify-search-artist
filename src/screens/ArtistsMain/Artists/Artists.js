@@ -3,7 +3,7 @@ import {useHistory, useParams} from 'react-router-dom';
 import Artist from './Artist/Artist';
 import {getSearchArtist} from '../../../api';
 import Loading from '../../../components/Loading/Loading';
-import {setSearchItem, setSearchResults} from '../../../actions/searchArtist';
+import {setSearchItem} from '../../../actions/searchArtist';
 import SearchComp from '../../../components/Search/SearchComp';
 import {SearchArtistContext} from '../../../context/searchArtist';
 import GridListComp from '../../../components/GridList/GridListComp';
@@ -23,13 +23,15 @@ const Artists = () => {
 
     const {searchValue: searchValueParams} = useParams();
 
+    const [artists, setArtists] = useState([]);
+
     const [isFirstLoading, setIsFirstLoading] = useState(true);
 
     const [isLoadingOnSearch, setIsLoadingOnSearch] = useState(false);
 
     const history = useHistory();
 
-    const {state: {value, searchResult: artists, fetchNewValues}, dispatch} = useContext(SearchArtistContext);
+    const {state: {value}, dispatch} = useContext(SearchArtistContext);
 
     // This useEffect is used if user refresh the page,
     // get the new search value from URL
@@ -41,25 +43,27 @@ const Artists = () => {
 
     useEffect(() => {
 
-        if (!fetchNewValues)
-            return;
-
-        const token = JSON.parse(localStorage.getItem('token'));
+        // Stop searching for artists if no value in the search bar
+        if (!value)
+            return
 
         if (!isFirstLoading)
             setIsLoadingOnSearch(true);
 
+        const token = JSON.parse(localStorage.getItem('token'));
+
         getSearchArtist(token?.access_token, value)
             .then(result => {
+
+                setArtists(result?.data?.artists?.items ?? []);
 
                 setIsFirstLoading(false);
                 setIsLoadingOnSearch(false);
 
-                setSearchResults(dispatch, result?.data?.artists?.items ?? [])
-
             })
             .catch(e => {
-                setSearchResults(dispatch, []);
+
+                setArtists([]);
 
                 setIsFirstLoading(false);
                 setIsLoadingOnSearch(false);
@@ -73,8 +77,7 @@ const Artists = () => {
                     if (status === 401) {
                         localStorage.clear();
                         history.push('/error', {action: {type: 'login'}, errorDescription: message});
-                    }
-                    else
+                    } else
                         history.push('/error', {action: {type: 'login'}, errorDescription: message});
 
                 } else {
@@ -83,7 +86,7 @@ const Artists = () => {
                 }
             })
 
-    }, [dispatch, history, isFirstLoading, value, fetchNewValues])
+    }, [dispatch, history, isFirstLoading, value])
 
     if (isFirstLoading)
         return (

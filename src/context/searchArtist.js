@@ -9,10 +9,8 @@ import searchArtist from '../reducer/searchArtist';
 const initialState = {
     value: '',
     type: 'search',
-    searchResult: [],
     id: 'artist-search',
     name: 'artistSearch',
-    fetchNewValues: false,
     endAdornment: <SearchIcon/>,
     label: 'Search for an artist...',
 }
