@@ -37,11 +37,12 @@ const Albums = () => {
                 .then(result => {
 
                     setAlbums(result.data.items);
-
                     setIsFirstLoading(false);
 
                 })
                 .catch(e => {
+
+                    setAlbums([]);
                     setIsFirstLoading(false);
 
                     // If error from Spotify
