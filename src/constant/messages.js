@@ -6,6 +6,7 @@
 export const GO_BACK = 'Go back';
 export const LOADING = 'Loading...';
 export const DATA_NOT_FOUND = 'Data not found';
+export const LOADING_ALBUMS = 'Loading albums';
 export const ERROR_OCCURRED = 'Error Occurred';
 export const ARTIST_NOT_FOUND = 'Artist not found';
 export const GO_TO_LOGIN = 'Click here to login';

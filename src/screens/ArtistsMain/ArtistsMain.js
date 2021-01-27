@@ -44,7 +44,7 @@ const ArtistsMain = () => {
                 <Route path={`${path}/:searchValue`} exact>
                     <Artists/>
                 </Route>
-                <Route path={`${path}/:artistName/:artistId/albums`} exact>
+                <Route path={`${path}/:artistId/albums`} exact>
                     <Albums/>
                 </Route>
                 <Route path="*">

@@ -1,30 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
-import Album from './Album/Album';
-import Link from '@material-ui/core/Link';
-import Error from '../../components/Error/Error';
 import Typography from '@material-ui/core/Typography';
-import {SearchArtistContext} from '../../context/searchArtist';
+import Album from './Album/Album';
+import {getArtistAlbums} from '../../api';
+import Loading from '../../components/Loading/Loading';
 import GridListComp from '../../components/GridList/GridListComp';
-import {ALBUMS_NOT_FOUND, ARTIST_NOT_FOUND, GO_BACK} from '../../constant/messages';
+import {ALBUMS_NOT_FOUND, LOADING_ALBUMS} from '../../constant/messages';
+import CenterMiddlePage from '../../hoc/CenterMiddlePage/CenterMiddlePage';
 
 import useStyles from './styles';
-
-// Create action to go back
-const artistNotFoundAction = history => {
-    return (
-        <Link
-            href='#'
-            onClick={e => {
-                e.preventDefault();
-                history.goBack()
-            }
-            }
-        >
-            {GO_BACK}
-        </Link>
-    )
-}
 
 /**
  * Create albums component
@@ -35,20 +19,54 @@ const Albums = () => {
 
     const classes = useStyles();
 
-    const {artistId} = useParams();
-
     const history = useHistory();
 
-    const {state: {searchResult: artists}} = useContext(SearchArtistContext);
+    const {artistId} = useParams();
 
-    // "+" is added to artistId because it is a string, we have to convert it to int
-    const artistFound = artists.find(val => val.id === +artistId);
+    const [albums, setAlbums] = useState([]);
 
-    // If artist not found, display error
-    if (!artistFound)
-        return <Error errorMsg={ARTIST_NOT_FOUND} action={artistNotFoundAction(history)}/>
+    const [isLoading, setIsLoading] = useState(true);
 
-    const {name, albums = []} = artistFound;
+    // Get artist albums
+    useEffect(() => {
+
+        const token = JSON.parse(localStorage.getItem('token'));
+
+        getArtistAlbums(token?.access_token, artistId)
+            .then(result => {
+
+                setAlbums(result.data.items);
+
+                setIsLoading(false);
+
+            })
+            .catch(e => {
+                setIsLoading(false);
+
+                // If error from Spotify
+                if (e?.response?.data?.error) {
+                    localStorage.clear();
+                    history.push('/error', {
+                        action: {type: 'login'}, errorDescription: e.response.data.error.message,
+                    });
+                } else {
+                    console.error(e.message);
+                    history.push('/error', {action: {type: 'login'}});
+                }
+            })
+
+    }, [artistId, history])
+
+
+    if (isLoading)
+        return (
+            <CenterMiddlePage>
+                <Loading loadingMessage={LOADING_ALBUMS}/>
+            </CenterMiddlePage>
+        )
+
+    // Artist name
+    const name = JSON.parse(localStorage.getItem('artist'))?.name ?? '';
 
     return (
         <div className={classes.albumsMain}>

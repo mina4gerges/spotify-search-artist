@@ -31,3 +31,14 @@ export const getSearchArtist = (token, q, type = 'artist') => axios.get(
     }
 );
 
+export const getArtistAlbums = (token, id) => axios.get(
+    `https://api.spotify.com/v1/artists/${id}/albums`,
+    {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }
+);
+
