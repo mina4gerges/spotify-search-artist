@@ -45,14 +45,20 @@ export const logout = (dispatch, history) => () => {
     history.push('/');
 }
 
+/**
+ * Create authenticate action
+ * @param dispatch
+ * @param history
+ * @param search
+ */
 export const authenticate = (dispatch, history, search) => {
 
     const [code, value] = search.split('=');
 
-    if (code === '?error')
+    if (code === '?error') {
+        localStorage.clear();
         history.push('/error', {errorMsg: AUTHENTICATION_FAILED, errorDescription: value, action: {type: 'login'}});
-
-    else if (code === '?code') {
+    } else if (code === '?code') {
 
         const oldToken = localStorage.getItem('token');
 
