@@ -25,40 +25,48 @@ const Albums = () => {
 
     const [albums, setAlbums] = useState([]);
 
-    const [isLoading, setIsLoading] = useState(true);
+    const [isFirstLoading, setIsFirstLoading] = useState(true);
 
     // Get artist albums
     useEffect(() => {
 
         const token = JSON.parse(localStorage.getItem('token'));
 
-        getArtistAlbums(token?.access_token, artistId)
-            .then(result => {
+        if (artistId)
+            getArtistAlbums(token?.access_token, artistId)
+                .then(result => {
 
-                setAlbums(result.data.items);
+                    setAlbums(result.data.items);
 
-                setIsLoading(false);
+                    setIsFirstLoading(false);
 
-            })
-            .catch(e => {
-                setIsLoading(false);
+                })
+                .catch(e => {
+                    setIsFirstLoading(false);
 
-                // If error from Spotify
-                if (e?.response?.data?.error) {
-                    localStorage.clear();
-                    history.push('/error', {
-                        action: {type: 'login'}, errorDescription: e.response.data.error.message,
-                    });
-                } else {
-                    console.error(e.message);
-                    history.push('/error', {action: {type: 'login'}});
-                }
-            })
+                    // If error from Spotify
+                    if (e?.response?.data?.error) {
+
+                        const {status, message} = e.response.data.error;
+
+                        // status === 401
+                        // Unauthorized. Expired or invalid session
+                        // Else code error may be invalid id, do not push to error page
+                        if (status === 401) {
+                            localStorage.clear();
+                            history.push('/error', {action: {type: 'login'}, errorDescription: message});
+                        }
+
+                    } else {
+                        console.error(e.message);
+                        history.push('/error', {action: {type: 'login'}});
+                    }
+                })
 
     }, [artistId, history])
 
 
-    if (isLoading)
+    if (isFirstLoading)
         return (
             <CenterMiddlePage>
                 <Loading loadingMessage={LOADING_ALBUMS}/>
