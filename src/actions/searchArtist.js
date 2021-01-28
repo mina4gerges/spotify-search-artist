@@ -10,6 +10,14 @@ export const handleSubmit = (dispatch, value, history) => e => {
         })
 }
 
-export const setSearchValue = (dispatch, value) =>
+export const setSearchValue = (dispatch, value, history) => {
+
+    if (history)
+        history.push({
+            pathname: '/artists/search',
+            search: `?q=${value}`
+        })
+
     dispatch({type: SET_SEARCH_VALUE, payload: {value}});
+}
 

@@ -36,7 +36,8 @@ const Artists = () => {
     // Set searchInput value from search value (URL)
     useEffect(() => {
 
-        setSearchValue(dispatch, search.replace('?q=', ''));
+        // decodeURI, to replace for example %20 in the url with a real white space
+        setSearchValue(dispatch, decodeURI(search.replace('?q=', '')));
 
     }, [dispatch, search])
 

@@ -6,8 +6,6 @@ import RatingComponent from '../../../../components/Rating/RatingComp';
 
 import icon from '../../../../assets/images/spotify-320.png';
 
-// TODO: fix on submit persists search value pn refresh
-
 /**
  * Create artist component
  * @param title
