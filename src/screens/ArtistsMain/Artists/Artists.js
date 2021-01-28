@@ -34,7 +34,6 @@ const Artists = () => {
     const {state: {value}, dispatch} = useContext(SearchArtistContext);
 
     // Set searchInput value from search value (URL)
-    // On first load
     useEffect(() => {
 
         setSearchValue(dispatch, search.replace('?q=', ''));
