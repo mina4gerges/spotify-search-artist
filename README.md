@@ -36,6 +36,6 @@ Web application using spotify API to search for artists
 
 - <h2 name="timeSpent">Time spent</h2>
 
-  Read and understand requirements + Set a plan | Read and understand spotify API | Development | Testing | Total
-        :--------------------------------------------:|:-------------------------------:|:-----------:|:-------:|:-----: 
-  4h | 2h | 21h | 4h | 31h
+    Read and understand requirements + Set a plan | Read and understand spotify API | Development | Testing | Total
+    :--------------------------------------------:|:-------------------------------:|:-----------:|:-------:|:-----: 
+    4h | 2h | 21h | 4h | 31h
