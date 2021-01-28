@@ -69,8 +69,7 @@ const Albums = () => {
                         }
 
                     } else {
-                        console.error(e.message);
-                        history.push('/error', {action: {type: 'login'}});
+                        history.push('/error', {action: {type: 'login'}, errorDescription: e.message});
                     }
                 })
 
