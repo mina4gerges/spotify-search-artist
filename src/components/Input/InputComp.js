@@ -34,22 +34,22 @@ const adornment = (adornmentIcon, onClick) => {
  * @returns {JSX.Element}
  * @constructor
  */
-const InputComp= ({
-                            id,
-                            name,
-                            label,
-                            handleChange,
-                            value: prevValue,
-                            type = 'text',
-                            className = '',
-                            helperText = '',
-                            disabled = false,
-                            required = false,
-                            multiline = false,
-                            endAdornment = null,
-                            startAdornment = null,
-                            error: prevError = false,
-                        }) => {
+const InputComp = ({
+                       id,
+                       name,
+                       label,
+                       handleChange,
+                       value: prevValue,
+                       type = 'text',
+                       className = '',
+                       helperText = '',
+                       disabled = false,
+                       required = false,
+                       multiline = false,
+                       endAdornment = null,
+                       startAdornment = null,
+                       error: prevError = false,
+                   }) => {
 
     const classes = useStyles();
 

@@ -2,16 +2,16 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 const ButtonComp = ({
-                             name,
-                             label,
-                             onClick,
-                             className,
-                             endIcon = null,
-                             startIcon = null,
-                             disabled = false,
-                             color = 'default',
-                             variant = 'contained',
-                         }) => {
+                        name,
+                        label,
+                        onClick,
+                        className,
+                        endIcon = null,
+                        startIcon = null,
+                        disabled = false,
+                        color = 'default',
+                        variant = 'contained',
+                    }) => {
     return (
         <Button
             name={name}
