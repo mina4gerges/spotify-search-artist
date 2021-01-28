@@ -1,6 +1,7 @@
 # Spotify Artist Search
 
 Web application using spotify API to search for artists
+Hosted on: https://spotify-search-artist.web.app
 
 1. [Installation](#installation)
 3. [Development environment](#developementEnvirement)
