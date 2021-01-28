@@ -1,21 +1,15 @@
-import {CHANGE_SEARCH_VALUE, SET_SEARCH_ITEM} from '../constant/actionTypes';
+import {SET_SEARCH_VALUE} from '../constant/actionTypes';
 
-export const handleChange = (dispatch, value) => {
-    dispatch({
-        type: CHANGE_SEARCH_VALUE,
-        payload: {value}
-    });
-}
-
-export const handleSubmit = (dispatch, value, source, history, path) => async e => {
+export const handleSubmit = (dispatch, value, history) => e => {
     e.preventDefault();
 
     if (value)
-        // standAlone when search component is alone without any other component
-        if (source === 'standAlone')
-            history.push(`${path}/${value}`);
+        history.push({
+            pathname: '/artists/search',
+            search: `?q=${value}`
+        })
 }
 
-export const setSearchItem = (dispatch, value) => {
-    dispatch({type: SET_SEARCH_ITEM, payload: {value}});
-}
+export const setSearchValue = (dispatch, value) =>
+    dispatch({type: SET_SEARCH_VALUE, payload: {value}});
+

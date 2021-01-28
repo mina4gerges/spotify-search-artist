@@ -41,7 +41,7 @@ const ArtistsMain = () => {
                         <SearchComp/>
                     </CenterMiddlePage>
                 </Route>
-                <Route path={`${path}/:searchValue`} exact>
+                <Route path={`${path}/search`} exact>
                     <Artists/>
                 </Route>
                 <Route path={`${path}/:artistId/albums`} exact>

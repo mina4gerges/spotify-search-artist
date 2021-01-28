@@ -1,8 +1,8 @@
 import React, {useCallback, useContext} from 'react';
-import {useHistory, useRouteMatch} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import InputComponent from '../Input/InputComp';
 import {SearchArtistContext} from '../../context/searchArtist';
-import {handleChange, handleSubmit} from '../../actions/searchArtist';
+import {handleSubmit, setSearchValue} from '../../actions/searchArtist';
 
 import useStyles from './styles';
 
@@ -11,22 +11,20 @@ import useStyles from './styles';
  * @returns {JSX.Element}
  * @constructor
  */
-const SearchComponent = ({source = 'standAlone'}) => {
+const SearchComp = () => {
 
     const classes = useStyles();
 
     const history = useHistory();
 
-    const {path} = useRouteMatch();
-
     const {state: {id, name, type, label, value, endAdornment}, dispatch} = useContext(SearchArtistContext);
 
     const handleChangeCallBack = useCallback(value => {
-        handleChange(dispatch, value);
+        setSearchValue(dispatch, value);
     }, [dispatch])
 
     return (
-        <form onSubmit={handleSubmit(dispatch, value, source, history, path)}>
+        <form onSubmit={handleSubmit(dispatch, value, history)}>
             <InputComponent
                 id={id}
                 name={name}
@@ -41,4 +39,4 @@ const SearchComponent = ({source = 'standAlone'}) => {
     )
 }
 
-export default SearchComponent;
+export default SearchComp;

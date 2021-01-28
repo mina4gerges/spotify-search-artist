@@ -1,13 +1,10 @@
-import {CHANGE_SEARCH_VALUE, SET_SEARCH_ITEM} from '../constant/actionTypes';
+import {SET_SEARCH_VALUE} from '../constant/actionTypes';
 
 const searchArtist = (state, action) => {
 
     switch (action.type) {
 
-        case CHANGE_SEARCH_VALUE:
-            return {...state, value: action.payload.value};
-
-        case SET_SEARCH_ITEM:
+        case SET_SEARCH_VALUE:
             return {...state, value: action.payload.value};
 
         default:

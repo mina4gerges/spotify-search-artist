@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import Artist from './Artist/Artist';
 import {getSearchArtist} from '../../../api';
 import Loading from '../../../components/Loading/Loading';
-import {setSearchItem} from '../../../actions/searchArtist';
+import {setSearchValue} from '../../../actions/searchArtist';
 import SearchComp from '../../../components/Search/SearchComp';
 import {SearchArtistContext} from '../../../context/searchArtist';
 import GridListComp from '../../../components/GridList/GridListComp';
@@ -21,7 +21,9 @@ const Artists = () => {
 
     const classes = useStyles();
 
-    const {searchValue: searchValueParams} = useParams();
+    const history = useHistory();
+
+    const {search} = useLocation();
 
     const [artists, setArtists] = useState([]);
 
@@ -29,18 +31,18 @@ const Artists = () => {
 
     const [isLoadingOnSearch, setIsLoadingOnSearch] = useState(false);
 
-    const history = useHistory();
-
     const {state: {value}, dispatch} = useContext(SearchArtistContext);
 
-    // This useEffect is used if user refresh the page,
-    // get the new search value from URL
+    // Set searchInput value from search value (URL)
+    // On first load
     useEffect(() => {
 
-        setSearchItem(dispatch, searchValueParams);
+        setSearchValue(dispatch, search.replace('?q=', ''));
 
-    }, [dispatch, searchValueParams])
+    }, [dispatch, search])
 
+
+    // Fetching artists:
     useEffect(() => {
 
         // Stop searching for artists if no value in the search bar
@@ -74,15 +76,13 @@ const Artists = () => {
 
                     // status === 401
                     // Unauthorized. Expired or invalid session
-                    if (status === 401) {
+                    if (status === 401)
                         localStorage.clear();
-                        history.push('/error', {action: {type: 'login'}, errorDescription: message});
-                    } else
-                        history.push('/error', {action: {type: 'login'}, errorDescription: message});
+
+                    history.push('/error', {action: {type: 'login'}, errorDescription: message});
 
                 } else {
-                    console.error(e.message);
-                    history.push('/error', {action: {type: 'login'}});
+                    history.push('/error', {action: {type: 'login'}, errorDescription: e.message});
                 }
             })
 
@@ -99,7 +99,7 @@ const Artists = () => {
         <div className={classes.artistsMain}>
 
             <div className={classes.artistsSearch}>
-                <SearchComp source='artists'/>
+                <SearchComp/>
             </div>
 
             {
