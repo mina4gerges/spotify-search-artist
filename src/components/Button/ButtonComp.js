@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-const ButtonComponent = ({
+const ButtonComp = ({
                              name,
                              label,
                              onClick,
@@ -27,4 +27,4 @@ const ButtonComponent = ({
     )
 }
 
-export default ButtonComponent
+export default ButtonComp;

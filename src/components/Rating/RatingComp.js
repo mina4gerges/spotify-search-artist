@@ -45,7 +45,7 @@ const getStarsDisplay = (rating, classNames) => {
  * @returns {JSX.Element}
  * @constructor
  */
-const RatingComponent = ({rating = maxRating}) => {
+const RatingComp = ({rating = maxRating}) => {
 
     const classNames = useStyles();
 
@@ -56,4 +56,4 @@ const RatingComponent = ({rating = maxRating}) => {
     )
 }
 
-export default RatingComponent;
+export default RatingComp;

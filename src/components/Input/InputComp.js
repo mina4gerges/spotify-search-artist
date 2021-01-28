@@ -34,7 +34,7 @@ const adornment = (adornmentIcon, onClick) => {
  * @returns {JSX.Element}
  * @constructor
  */
-const InputComponent = ({
+const InputComp= ({
                             id,
                             name,
                             label,
@@ -147,4 +147,4 @@ const InputComponent = ({
     )
 }
 
-export default InputComponent;
+export default InputComp;
