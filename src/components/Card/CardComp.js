@@ -28,10 +28,10 @@ const getCardBody = ({img, imgTitle, title, description}) => {
                 title={imgTitle}
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" noWrap>
                     {title}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
+                <Typography variant="body2" color="textSecondary" component="p" noWrap>
                     {description}
                 </Typography>
             </CardContent>
