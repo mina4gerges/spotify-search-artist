@@ -8,26 +8,23 @@ Web application using spotify API to search for artists
 
 -  <h2 name="installation">Installation</h2>
    
-    1. git clone https://github.com/mina4gerges/spotify-search-artist.git
+    - git clone https://github.com/mina4gerges/spotify-search-artist.git
+
+    - Go to the directory **spotify-search-artist** and hit **npm install** to install the dependencies
     
-    2. Go to the directory **spotify-search-artist** and hit **npm install** to install the dependencies
-    
-    3. Go to https://developer.spotify.com/dashboard/
+    - Go to https://developer.spotify.com/dashboard/
    
-    4. Sign in/up and create a new application to get a CLIENT_ID and a SECRET_ID
+    - Sign in/up and create a new application to get a CLIENT_ID and a SECRET_ID
     
-    5. The ids (CLIENT_ID and SECRET_ID) will be used in the project to get access to Spotify API
+    - The ids (CLIENT_ID and SECRET_ID) will be used in the project to get access to Spotify API
     
-    6. Click **Edit Setting** in Spotify dashboard to set the **website name** and **Redirect URIs** inputs.
-      </br>
-      For now, we will use **localhost:3000** for website name and  **localhost:3000/artists** for Redirect URIs 
-      (if the port is 3000 if not please put your port number)
+    - Click **Edit Setting** in Spotify dashboard to set the **website name** and **Redirect URIs** inputs. For now, we will use **localhost:3000** for website name and  **localhost:3000/artists** for Redirect URIs (if the port is 3000 if not please put your port number)
     
-    7. Set CLIENT_ID and SECRET_ID in **/src/constant/spotify.js**
+    - Set CLIENT_ID and SECRET_ID in **/src/constant/spotify.js**
     
-    8. Hit **npm start** to run the application
+    - Hit **npm start** to run the application
     
-    9. Congrats 🎉 The app is running now 
+    - Congrats 🎉 The app is running now 
 
 -  <h2 name="developementEnvirement">Development environment</h2>
    
@@ -37,6 +34,6 @@ Web application using spotify API to search for artists
 
 -  <h2 name="timeSpent">Time spent</h2>
    
-   Read and understand requirements + Set a plan       |   Read and understand spotify API  |  Development | Testing | Total
-   :--------------------------------------------------:|:----------------------------------:|:------------:|:-------:|:----- 
-        4h                                             |    2h                              |     21h      |    4h   |  31h
+      Read and understand requirements + Set a plan | Read and understand spotify API | Development | Testing | Total
+      :--------------------------------------------:|:-------------------------------:|:-----------:|:-------:|:-----: 
+      4h | 2h | 21h | 4h | 31h
