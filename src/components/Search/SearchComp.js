@@ -20,8 +20,8 @@ const SearchComp = () => {
     const {state: {id, name, type, label, value, endAdornment}, dispatch} = useContext(SearchArtistContext);
 
     const handleChangeCallBack = useCallback(value => {
-        setSearchValue(dispatch, value, history);
-    }, [dispatch, history])
+        setSearchValue(dispatch, value);
+    }, [dispatch])
 
     return (
         <form onSubmit={handleSubmit(dispatch, value, history)}>
