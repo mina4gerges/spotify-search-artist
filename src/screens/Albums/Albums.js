@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Album from './Album/Album';
 import {getArtistAlbums} from '../../api';
@@ -85,21 +86,23 @@ const Albums = () => {
 
     return (
         <div className={classes.albumsMain}>
-            <div className={classes.albumsHeader}>
-                <Typography variant="h5" className={classes.artistName}>
-                    {artistName}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                    Albums
-                </Typography>
-            </div>
-            <div className={classes.albumsBody}>
-                <GridListComp
-                    data={albums}
-                    RenderItemComp={Album}
-                    errorMsg={ALBUMS_NOT_FOUND}
-                />
-            </div>
+            <Container fixed>
+                <div className={classes.albumsHeader}>
+                    <Typography variant="h5" className={classes.artistName}>
+                        {artistName}
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                        Albums
+                    </Typography>
+                </div>
+                <div className={classes.albumsBody}>
+                    <GridListComp
+                        data={albums}
+                        RenderItemComp={Album}
+                        errorMsg={ALBUMS_NOT_FOUND}
+                    />
+                </div>
+            </Container>
         </div>
     )
 }
