@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import Container from '@material-ui/core/Container';
 import {useHistory, useLocation} from 'react-router-dom';
 import Artist from './Artist/Artist';
 import {getSearchArtist} from '../../../api';
@@ -97,23 +98,24 @@ const Artists = () => {
 
     return (
         <div className={classes.artistsMain}>
+            <Container fixed>
+                <div className={classes.artistsSearch}>
+                    <SearchComp/>
+                </div>
 
-            <div className={classes.artistsSearch}>
-                <SearchComp/>
-            </div>
+                {
+                    isLoadingOnSearch &&
+                    <Loading type='linear'/>
+                }
 
-            {
-                isLoadingOnSearch &&
-                <Loading type='linear'/>
-            }
-
-            <div className={classes.artistsSearchBody}>
-                <GridListComp
-                    data={artists}
-                    RenderItemComp={Artist}
-                    errorMsg={ARTIST_NOT_FOUND}
-                />
-            </div>
+                <div className={classes.artistsSearchBody}>
+                    <GridListComp
+                        data={artists}
+                        RenderItemComp={Artist}
+                        errorMsg={ARTIST_NOT_FOUND}
+                    />
+                </div>
+            </Container>
         </div>
     )
 }

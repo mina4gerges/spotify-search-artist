@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Auth from './screens/Auth/Auth';
 import {AuthProvider} from './context/auth';
@@ -16,7 +15,7 @@ import AuthenticatedComp from './hoc/AuthenticatedComp/AuthenticatedComp';
 const App = () => {
     return (
         <AuthProvider>
-            <Container fixed id='main-project-container'>
+            <div id='main-project-container'>
                 <BrowserRouter>
                     <Switch>
                         <Route path='/' exact>
@@ -35,7 +34,7 @@ const App = () => {
                         </Route>
                     </Switch>
                 </BrowserRouter>
-            </Container>
+            </div>
         </AuthProvider>
     );
 }
