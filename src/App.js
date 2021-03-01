@@ -5,7 +5,7 @@ import {AuthProvider} from './context/auth';
 import Error from './components/Error/Error';
 import ArtistsMain from './screens/ArtistsMain/ArtistsMain';
 import PageNotFound from './components/PageNotFound/PageNotFound';
-import AuthenticatedComp from "./hoc/AuthenticatedComp/AuthenticatedComp";
+import AuthenticatedComp from './hoc/AuthenticatedComp/AuthenticatedComp';
 
 /**
  * Main App
