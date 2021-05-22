@@ -8,7 +8,7 @@ import icon from '../assets/images/spotify-320.png';
  * @type {{isLoading: boolean, name: string, endIcon: JSX.Element, label: string}}
  */
 const initialState = {
-    label: 'Login',
+    label: 'Loginnnnn',
     name: 'login',
     isLoading: false,
     endIcon: <img src={icon} alt='spotify-icon' width={25} height={25}/>
